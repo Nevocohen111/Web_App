@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=0.8">
+    <link rel="stylesheet" href="/assets/css/profile.css">
+    <meta charset="ISO-8859-1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+            integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
+            integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital@1&display=swap" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <title>Profile</title>
+</head>
+<body>
+<!--middle the card-->
+
+<section class="bg-gradient-primary" style="height:100vh">
+    <div class="container mr-2 containerResponsive">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card shadow border-0">
+                    <button type="button" class="btn btn-primary btn-sm" onclick="window.location.href='/'">Home
+                    </button>
+                    <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                        <!--  <form method="post" enctype="multipart/form-data" th:action="@{/createImage}" th:each="l :${list}">
+                               <div class="row" >
+                                   <img sec:authorize="hasRole('ROLE_USER')" th:src="@{${l.imgURL}}"  alt="" class="profile_img"/>
+                                   <img sec:authorize="hasRole('ROLE_ADMIN')"  src="https://images.unsplash.com/photo-1541560052-5e137f229371?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"  alt="" class="profile_img"/>
+                               </div>
+                               <div class="text-center" style="color:red;" th:if="${#vars['message']}" th:text="${#vars['message']}"></div>
+                               <hr>
+                               <div class="text-center">
+                               <input type="file" name="file" id="files" style="display:none;">
+                                   <label for="files" >
+                                       <div sec:authorize="hasRole('ROLE_USER')" class="btn btn-info btn-sm"> <i class="fas fa-upload"></i>
+                                           <input type="submit" value="Change profile picture" class="btn btn-info btn-sm" style="border:none;"/></div>
+                                       <div sec:authorize="hasRole('ROLE_ADMIN')" >
+                                           <p class="alert alert-warning">You can only a change profile picture as a user!</p></div>
+                                   </label>
+                               </div>
+                           </form>-->
+                        <!-- img centerd -->
+                        <img alt="" class="text-center profile_img" th:each="p : ${profileImg}"
+                             th:if="${newProfile} != true" th:src="@{${p.imgURL}}"/>
+                        <div class="display_name">
+                            <h5 style="font-family:fangsong;color:#6495ed" class="alert alert-primary"
+                                th:if="${newProfile} != true" sec:authorize="isAuthenticated()">Welcome
+                                [[${#httpServletRequest.remoteUser}]]</h5>
+                            <form th:action="@{/newContact}" method="post" th:object="${profile}" th:each="l : ${list}">
+                                <div class="form-group">
+                                    <input type="hidden" th:field="*{id}" th:placeholder="${l.id}">
+                                </div>
+                                <div class="form-group">
+                                    <p class="h6 text-primary mb-0">First Name</p>
+                                    <input type="hidden" class="btn btn-outline-secondary inputResponsive"
+                                           style="font-weight:bold;" th:field="*{name}"
+                                           th:placeholder="${l.name}">
+                                    <input type="text" class="btn btn-outline-secondary inputResponsive"
+                                           style="font-weight:bold;" th:field="*{userName}"
+                                           th:placeholder="${l.userName}">
+                                </div>
+                                <div class="form-group">
+                                    <p class="h6 text-primary mb-0">Last name</p>
+                                    <input type="text" class="btn btn-outline-secondary inputResponsive"
+                                           style="font-weight:bold;" th:field="*{lastName}"
+                                           th:placeholder="${l.lastName}">
+                                </div>
+                                <div class="form-group">
+                                    <p class="h6 text-primary mb-0">Email</p>
+                                    <input type="text" class="btn btn-outline-secondary inputResponsive"
+                                           style="font-weight:bold;" th:field="*{email}"
+                                           th:placeholder="${l.email}">
+                                </div>
+                                <div class="form-group">
+                                    <p class="h6 text-primary mb-0">Fun fact</p>
+                                    <input type="text" class="btn btn-outline-secondary inputResponsive"
+                                           style="font-weight:bold;" th:field="*{hobbies}"
+                                           th:placeholder="${l.hobbies}">
+                                </div>
+                                <div class="form-group">
+                                    <p class="h6 text-primary mb-0">Work place</p>
+                                    <input type="text" class="btn btn-outline-secondary inputResponsive"
+                                           style="font-weight:bold;" th:field="*{workPlace}"
+                                           th:placeholder="${l.workPlace}">
+                                </div>
+                                <div class="form-group">
+                                    <p class="h6 text-primary mb-0">Phone number</p>
+                                    <input type="text" class="btn btn-outline-secondary inputResponsive"
+                                           style=";font-weight:bold;" th:field="*{phone}"
+                                           th:placeholder="${l.phone}">
+                                </div>
+                                <div class="container">
+                                    <div class="col-md-12 text-center">
+                                        <input type="submit" value="Save Changes" class="btn btn-primary"/>
+                                    </div>
+                                </div>
+                            </form>
+                            <div th:if="${newProfile}">
+                                <img alt="" class="text-center profile_img"
+                                     src="https://www.w3schools.com/w3images/avatar2.png"/>
+                                <div class="display_name">
+                                    <h5 style="font-family:fangsong;color:#6495ed" class="alert alert-primary"
+                                        sec:authorize="isAuthenticated()">Welcome
+                                        [[${#httpServletRequest.remoteUser}]]</h5>
+                                </div>
+
+                                <form th:action="@{/newContact}" method="post" th:object="${profile}"
+                                      th:if="${newProfile}">
+
+                                    <div class="form-group">
+                                        <input type="hidden" th:field="*{id}">
+                                    </div>
+                                    <div class="form-group">
+                                        <p class="h6 text-primary mb-0">First Name</p>
+                                        <input type="hidden" class="btn btn-outline-secondary inputResponsive"
+                                               style="font-weight:bold;" th:field="*{name}">
+                                        <input type="text" class="btn btn-outline-secondary inputResponsive"
+                                               style="font-weight:bold;" th:field="*{userName}"
+                                               placeholder="Insert your name">
+                                    </div>
+                                    <div class="form-group">
+                                        <p class="h6 text-primary mb-0">Last name</p>
+                                        <input type="text" class="btn btn-outline-secondary inputResponsive"
+                                               style="font-weight:bold;" th:field="*{lastName}"
+                                               placeholder="Insert your Last Name">
+                                    </div>
+                                    <div class="form-group">
+                                        <p class="h6 text-primary mb-0">Email</p>
+                                        <input type="text" class="btn btn-outline-secondary inputResponsive"
+                                               style="font-weight:bold;" th:field="*{email}"
+                                               placeholder="Insert your Email">
+                                    </div>
+                                    <div class="form-group">
+                                        <p class="h6 text-primary mb-0">Fun fact</p>
+                                        <input type="text" class="btn btn-outline-secondary inputResponsive"
+                                               style="font-weight:bold;" th:field="*{hobbies}"
+                                               placeholder="Fun fact">
+                                    </div>
+                                    <div class="form-group">
+                                        <p class="h6 text-primary mb-0">Work place</p>
+                                        <input type="text" class="btn btn-outline-secondary inputResponsive"
+                                               style="font-weight:bold;" th:field="*{workPlace}"
+                                               placeholder="Where do you work?">
+                                    </div>
+                                    <div class="form-group">
+                                        <p class="h6 text-primary mb-0">Phone number</p>
+                                        <input type="text" class="btn btn-outline-secondary inputResponsive"
+                                               style=";font-weight:bold;" th:field="*{phone}"
+                                               placeholder="Insert phone number here">
+                                    </div>
+                                    <div class="container">
+                                        <div class="col-md-12 text-center">
+                                            <input type="submit" value="Save Changes" class="btn btn-primary"/>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+</body>
+</html>

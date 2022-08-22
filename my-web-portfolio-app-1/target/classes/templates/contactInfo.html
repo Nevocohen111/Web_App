@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<meta charset="ISO-8859-1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+        integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
+        integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
+        crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+      rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital@1&display=swap" rel="stylesheet">
+
+<body>
+<li th:fragment="contactInfo" class="nav-item dropdown no-arrow">
+    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <!-- make the span below route to login page -->
+        <span class="mr-2  d-lg-inline medium" style="color:#4169e1;font-family:fangsong" sec:authorize="isAuthenticated()">Hello [[${#httpServletRequest.remoteUser}]]</span>
+        <span class="mr-2  d-lg-inline medium" style="color:#686868;font-family:fangsong" sec:authorize="!isAuthenticated()" >Log in</span>
+        <img sec:authorize="!isAuthenticated()" class="img-profile rounded-circle"  src="https://www.w3schools.com/w3images/avatar1.png">
+        <img sec:authorize="hasRole('ROLE_USER')" class="img-profile rounded-circle" th:each="l : ${list}"  th:src="@{${l.imgURL}}">
+        <img sec:authorize="hasRole('ROLE_ADMIN')" class="img-profile rounded-circle"  src="https://images.unsplash.com/photo-1541560052-5e137f229371?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80">
+    </a>
+    <!-- Dropdown - User Information -->
+    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+         aria-labelledby="userDropdown">
+        <a class="dropdown-item" th:unless="${#httpServletRequest.remoteUser}" th:href="@{/login}" href="login.html" >
+            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2" style="color:#5a79ba"></i>
+            Login
+        </a>
+        <!-- register icon bootstrap -->
+        <a class="dropdown-item" th:unless="${#httpServletRequest.remoteUser}" href="#" onclick="window.location.href='/register'" >
+            <i class="fas fa-user-plus fa-sm fa-fw mr-2" style="color:#32de84"></i>
+            Register
+        </a>
+        <a class="dropdown-item"  th:href="@{/profile}">
+            <i class="fas fa-user fa-sm fa-fw mr-2" style="color:#298b28"></i>
+            My Profile
+        </a>
+        <a class="dropdown-item" sec:authorize="hasRole('ROLE_USER')" th:each="u : ${myUser}"  th:href="@{/deleteUser(userId = ${u.id})}" style="color:red">
+            <i class="fas fa-user-minus fa-sm fa-fw mr-2" style="color:red"></i>
+            Delete account
+        </a>
+        <a class="dropdown-item" sec:authorize="!isAuthenticated()" th:href="@{/forgot-password}" >
+            <!-- a forgot-password fas fa icon -->
+            <i class="fas fa-key fa-sm fa-fw mr-2" style="color:#FF0000"></i>
+            Forgot Password
+        </a>
+
+
+        <div class="dropdown-divider"></div>
+        <form th:if="${#httpServletRequest.remoteUser}" class="dropdown-item" method="Post" th:action="@{/logout}">
+            <input class="btn btn-sm btn-outline-danger" type="submit" value="Log Out">
+                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+            </input>
+        </form>
+    </div>
+</li>
+</body>

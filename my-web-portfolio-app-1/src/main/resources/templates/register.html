@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+
+    <title>Register</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=0.7">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <title>Register page</title>
+</head>
+
+<body class="bg-gradient-primary">
+<div class="container">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <!-- narrow card body -->
+
+        <div class="card-body p-0">
+            <div class="row">
+                <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                <div class="col-lg-6">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h4 style="letter-spacing:1px;color:#4169e1;font-family:fangsong">Create an Account!</h4>
+                            <br>
+                        </div>
+
+                        </ul>
+                        <form action="/register" method="post" class="user">
+                            <div class="form-group row">
+                                <div class="col-sm-6 registrationFields">
+                                    <input type="text" class="form-control form-control-user text-center inputRegister "
+                                           placeholder="User Name" name="username" id="username" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 registrationFields">
+                                    <input type="email" class="form-control form-control-user text-center inputRegister"
+                                           placeholder="Email" name="email" id="email" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 registrationFields">
+                                    <input oninput="checkEmailMatch(this);" type="email"
+                                           class="form-control form-control-user text-center inputRegister"
+                                           placeholder="Confirm email" name="email" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6  registrationFields">
+                                    <input required type="password" name="password" id="password"
+                                           class="form-control form-control-user text-center inputRegister"
+                                           placeholder="Password">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6  registrationFields">
+                                    <input oninput="checkPasswordMatch(this);" required type="password" name="password"
+                                           class="form-control form-control-user text-center inputRegister"
+                                           placeholder="Confirm password">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-user btn-block btnRegister">
+                                <i class="fas fa-user-plus"></i> Register Account
+                            </button>
+                            <hr>
+                            <button type="button" class="btn btn-primary btn-md homeInput" onclick="window.location.href='/'">
+                                Home
+                            </button>
+                            <button type="button" class="btn btn-primary btn-md"
+                                    onclick="window.location.href='/login'">Login
+                            </button>
+                        </form>
+                        <br>
+                        <div class="alert alert-warning text-center" th:if="${emailRegistered}"
+                             th:text="${emailRegistered}"></div>
+                        <div class="alert alert-danger"
+                             role="alert"
+                             th:if="${problem} == true">
+                            <p class="text text-center" th:text="${session.error}" th:unless="${session == null}">[...]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+
+</body>
+
+</html>

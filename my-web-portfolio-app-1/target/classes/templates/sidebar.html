@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" th:fragment="sidebar">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" th:href="@{/}">
+        <div class="sidebar-brand-icon">
+            <i class="fas fa-home"></i>
+        </div>
+        <!--th:href="@{/index}">SB Admin <sup>2</sup></th:href>-->
+        <div class="sidebar-brand-text mx-3">Home page</div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Information
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a aria-controls="collapseTwo" aria-expanded="true" class="nav-link collapsed" data-target="#collapseTwo"
+           data-toggle="collapse" href="#">
+            <i class=" fas fa-chalkboard-teacher"></i>
+            <span>Personal Space</span>
+        </a>
+        <div aria-labelledby="headingTwo" class="collapse" data-parent="#accordionSidebar" id="collapseTwo">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Options</h6>
+                <a class="collapse-item" th:href="@{/contact}">Contact Administrator</a>
+                <a class="collapse-item" sec:authorize="!isAuthenticated()" th:href="@{/forgot-password}">Forgot Password</a>
+                <a class="collapse-item" sec:authorize="!isAuthenticated()" th:href="@{/login}">Log In</a>
+                <a class="collapse-item" sec:authorize="!isAuthenticated()" th:href="@{/register}">Register</a>
+                <a class="collapse-item" sec:authorize="isAuthenticated()" th:href="@{/logout}">Log Out</a>
+                <a class="collapse-item" th:href="@{/profile}">My Profile</a>
+            </div>
+        </div>
+    </li>
+
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Menu
+    </div>
+    <li class="nav-item">
+        <a class="nav-link"  th:href="@{/convert}">
+            <i class="fas fa-fw fa-dollar-sign"></i>
+            <span>Currency Converter</span></a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link"   th:href="@{/holidays}">
+            <i class="fas fa-fw fa-calendar-alt"></i>
+            <span>Holidays</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link"   th:href="@{/certificates}">
+            <!-- fas fa-certificates -->
+            <i class="fas fa-fw fa-certificate"></i>
+            <span>Certificates</span></a>
+    </li>
+    <!-- Nav Item - Charts -->
+    <li class="nav-item">
+        <a class="nav-link" th:href="@{/reviews}">
+            <i class="fas fa-fw fa-star"></i>
+            <span>Reviews</span></a>
+    </li>
+
+    <!-- Nav Item - Tables -->
+    <li class="nav-item">
+        <a class="nav-link" th:href="@{/inquiries}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Inquiries Box</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" th:href="@{/search}">
+            <i class="fas fa-fw fa-tasks"></i>
+            <span>Activity Manager</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" th:href="@{/carousel}">
+            <i class="fas fa-fw fa-images"></i>
+            <span>Places to visit</span></a>
+    </li>
+
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+    <!-- Sidebar Message -->
+    <div class="sidebar-card d-lg-flex" sec:authorize="!isAuthenticated()">
+        <img alt="..." class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg">
+        <p class="text-center mb-2"><strong>Forgot password?</strong><br>Don't you worry we will help you reset it in no
+            time!</p>
+        <button class="btn btn-success btn-sm" onclick="window.location.href='/forgot-password'">Click here!</button>
+    </div>
+
+    <div class="sidebar-card  d-lg-flex" sec:authorize="isAuthenticated()">
+        <i class="fas fa-user-circle fa-2x"></i>
+        <p class="text-center mb-2"><strong>Take me to my profile</strong><br>Want to check out your profile?</p>
+        <button class="btn btn-primary btn-sm" onclick="window.location.href='/profile'">Click here!</button>
+    </div>
+</ul>
+</body>
+</html>

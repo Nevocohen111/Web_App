@@ -110,7 +110,8 @@
                            th:field="*{userName}">
                     </div>
                     <div class="col-md-12 text-center">
-                        <button type="submit" class="btn btn-success ">Add</button>
+                        <a th:href="@{/}" class="btn btn-success">Home Page</a>
+                        <button type="submit" class="btn btn-success ">Add Activity</button>
                     </div>
                 </form>
 
@@ -119,11 +120,6 @@
         </tbody>
     </table>
     <div th:if="${#vars['message']}" class="alert alert-success" th:text="${#vars['message']}"></div>
-    <!-- <div class="alert alert-danger alert-dismissible fade show"
-          role="alert"
-          th:each="error : ${#fields.errors('myPurchase.*')}"
-          th:text="${error}"></div>-->
-
 </div>
 
 </body>
